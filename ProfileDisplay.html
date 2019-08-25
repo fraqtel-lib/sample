@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Profile Display Demo</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+
+<body>
+	<style>
+		html,
+		body,
+		main {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			margin: 0;
+		}
+
+		#image {
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center center;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+
+		main {
+			background-color: rgb(53, 53, 53);
+		}
+
+		section {
+			position: relative;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+
+		#details {
+			font-family: Arial, Helvetica, sans-serif;
+			padding: 0 1em;
+		}
+
+		#idName {
+			color: whitesmoke;
+			font-size: 80%;
+
+		}
+
+		#idNumber {
+			color: yellow;
+		}
+	</style>
+
+	<main style="display: flex;">
+		<section style="flex:1">
+			<div id="image"></div>
+		</section>
+		<section style="flex:3" id="details">
+			<span id="idNumber"></span>
+			<div id="idName"></div>
+		</section>
+	</main>
+
+	<script>
+		"use strict";
+
+		function getQueryVariable(variable)
+		{
+			var query = window.location.search.substring(1);
+			var vars = query.split('&');
+			for (var i = 0; i < vars.length; i++)
+			{
+				var pair = vars[i].split('=');
+				if (decodeURIComponent(pair[0]) == variable)
+				{
+					return decodeURIComponent(pair[1]);
+				}
+			}
+			//console.log('Query variable %s not found', variable);
+		}
+
+		var rgDirectory =
+		{
+			"60": ["வெள்ளை கருப்பு விதவை", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Goldene_Kamera_2012_-_Scarlett_Johansson_3_%28cropped%29.JPG/420px-Goldene_Kamera_2012_-_Scarlett_Johansson_3_%28cropped%29.jpg"],
+			"61": ["Luxmi Saraswati Bhuvaneshwari Shakti", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Amy_Adams_UK_Nocturnal_Animals_Premiere_%28cropped%29.jpg/466px-Amy_Adams_UK_Nocturnal_Animals_Premiere_%28cropped%29.jpg"],
+			"62": ["Durga Parvati Rukmini", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/PatriciaAshley_JustAnotherLostSoul_%28cropped%29.jpg/461px-PatriciaAshley_JustAnotherLostSoul_%28cropped%29.jpg"],
+			"63": ["குணத்தை விரும்பினேன்", "https://m.media-amazon.com/images/M/MV5BMjA5MzE2NzA2M15BMl5BanBnXkFtZTgwNTc1NDA4NTM@._V1_QL50_.jpg"],
+			"64": ["Красные глаза", "https://m.media-amazon.com/images/M/MV5BMjAzNDU4NDY0MV5BMl5BanBnXkFtZTcwNzAyNzU1Mw@@._V1_QL50_SY1000_CR0,0,1503,1000_AL_.jpg"],
+			"65": ["God Emperor of This Dimension", "https://m.media-amazon.com/images/M/MV5BMTg0OTM2NzcyNl5BMl5BanBnXkFtZTcwMjMzNTU0OQ@@._V1_QL50_SY1000_SX1500_AL_.jpg"],
+			"66": ["Best Mommy In The World", "https://m.media-amazon.com/images/M/MV5BNjg3ODQ1NzYzMl5BMl5BanBnXkFtZTgwNTY4NDU3MjE@._V1_QL50_SY1000_SX1250_AL_.jpg"],
+			"67": ["நடனம் செவிலியர்", "https://m.media-amazon.com/images/M/MV5BMTk1NjQ3NTYyNF5BMl5BanBnXkFtZTcwODU4NzQ4NQ@@._V1_QL50_SY1000_CR0,0,668,1000_AL_.jpg"],
+			"68": ["トリプルファン", "https://m.media-amazon.com/images/M/MV5BZjIwN2JhZWItZmEzNS00ZmU1LWJkYmMtMjhlNmRjZDE2MWMzXkEyXkFqcGdeQXVyNDkzNTM2ODg@._V1_QL50_SY1000_CR0,0,1498,1000_AL_.jpg"],
+			"69": ["セブンではない", "https://m.media-amazon.com/images/M/MV5BMTc3Njk0NjQ3M15BMl5BanBnXkFtZTgwMTQ5MjY1MTE@._V1_QL50_SY1000_CR0,0,791,1000_AL_.jpg"],
+			"200": ["アッラーは偉大です", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Aaliyah-02.jpg/322px-Aaliyah-02.jpg"],
+			"201": ["老實說不可見", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Jessica_Alba_at_TechCrunch_Disrupt_San_Francisco_2012_02_%28cropped%29.jpg/683px-Jessica_Alba_at_TechCrunch_Disrupt_San_Francisco_2012_02_%28cropped%29.jpg"],
+			"202": ["இழந்த குளவி", "https://m.media-amazon.com/images/M/MV5BMTVkNDBkMDYtMzJmMS00YzUwLTg2NjYtNjY5MWM4ZTI1ODJkXkEyXkFqcGdeQXVyMzQ3Nzk5MTU@._V1_QL50_SY1000_CR0,0,803,1000_AL_.jpg"],
+			"203": ["艾瑪·沃特森", "https://m.media-amazon.com/images/M/MV5BMjI4NjM1NDkyN15BMl5BanBnXkFtZTgwODgyNTY1MjE@._V1.._QL50_SY1000_CR0,0,665,1000_AL_.jpg"],
+			"204": ["金發", "https://m.media-amazon.com/images/M/MV5BNzk0MjE4NDYwOF5BMl5BanBnXkFtZTgwNjc5MzU1MDI@._V1_QL50_SY1000_SX750_AL_.jpg"],
+			"205": ["ಬೆಸ್ಟ್ ಮೆಡಿಸಿನ್ ಲೇಡಿ", "https://m.media-amazon.com/images/M/MV5BZTljMGNhNGEtMzRkNy00MTViLWFjMjctYzM0YWQ4MTc1OGNkXkEyXkFqcGdeQXVyMjk3NTUyOTc@._V1_QL50_SY1000_CR0,0,829,1000_AL_.jpg"],
+			"206": ["雷切爾麥克亞當斯", "https://m.media-amazon.com/images/M/MV5BNTU0OTQ1MzAyMF5BMl5BanBnXkFtZTYwMDE3NzE1._V1_QL50_.jpg"],
+			"207": ["అద్భుతమైన ఖలీసీ", "https://m.media-amazon.com/images/M/MV5BY2U1YTY4MjMtYzIxMy00N2NlLThmZWQtODUwNDZmN2I4OGQ4XkEyXkFqcGdeQXVyMzQ3Nzk5MTU@._V1_QL50_.jpg"],
+			"208": ["இளவரசி தெரியவில்லை", "https://m.media-amazon.com/images/M/MV5BNDYxZDYwODMtNWVkZS00MTI5LWE0MzMtNGZiZTk2ZDZjMzkyXkEyXkFqcGdeQXVyMTE2NzA0Ng@@._V1_QL50_.jpg"],
+			"209": ["అద్భుతమైన మహిళ", "https://m.media-amazon.com/images/M/MV5BMTU3MTI5ODE4NV5BMl5BanBnXkFtZTgwMTc4NDkzODE@._V1_QL50_SY1000_CR0,0,792,1000_AL_.jpg"],
+			"210": ["నృత్య రాణి", "https://m.media-amazon.com/images/M/MV5BOWFlZDlkYTUtMjRhZS00YmQ0LWIyMzQtNmU4ZDQyNmUwYjY3XkEyXkFqcGdeQXVyNDMxNzIxMg@@._V1_QL50_SY1000_CR0,0,801,1000_AL_.jpg"],
+			"211": ["", "https://m.media-amazon.com/images/M/MV5BMTkxMjA3OTQ0N15BMl5BanBnXkFtZTcwNDEwMzYwNg@@._V1_QL50_SY1000_CR0,0,711,1000_AL_.jpg"],
+			"212": ["", "https://m.media-amazon.com/images/M/MV5BYjI2NjhlNmQtOWQ3MS00ZTUxLWI3N2EtMDlmNTk0YzFmMTM2XkEyXkFqcGdeQXVyNjUwNzk3NDc@._V1_QL50_.jpg"],
+			"213": ["", "https://m.media-amazon.com/images/M/MV5BZDEwODk1ZTEtMGEyZC00NWYzLWIzNGEtY2Y5NTU2NTEyM2I1XkEyXkFqcGdeQXVyMzQ2MDUxMTg@._V1_QL50_.jpg"],
+			"214": ["", "https://m.media-amazon.com/images/M/MV5BMjYzMjU5MDU4Nl5BMl5BanBnXkFtZTgwNDI0ODE2MzI@._V1_QL50_SY1000_CR0,0,1333,1000_AL_.jpg"],
+			"215": ["", "https://m.media-amazon.com/images/M/MV5BMTg3MDc0MjY0OV5BMl5BanBnXkFtZTcwNzU1MDAxOA@@._V1_QL50_SY1000_CR0,0,740,1000_AL_.jpg"],
+			"216": ["", "https://m.media-amazon.com/images/M/MV5BMjEyNjU2ODg5MV5BMl5BanBnXkFtZTcwNjI0MTY2Mw@@._V1_QL50_SY1000_CR0,0,744,1000_AL_.jpg"],
+			"217": ["", "https://m.media-amazon.com/images/M/MV5BMTY3OTYxMDAzN15BMl5BanBnXkFtZTcwNDQ0MzA4NA@@._V1_QL50_SY1000_CR0,0,1170,1000_AL_.jpg"],
+			"218": ["", "https://m.media-amazon.com/images/M/MV5BMTQ4MzY1NzU5Nl5BMl5BanBnXkFtZTcwODI0MTY2Mw@@._V1_QL50_SY1000_SX1500_AL_.jpg"],
+			"219": ["", "https://m.media-amazon.com/images/M/MV5BMTU1MzkxMjAxNV5BMl5BanBnXkFtZTcwODQ0MzA4NA@@._V1_QL50_SY1000_CR0,0,742,1000_AL_.jpg"],
+			"220": ["", "https://m.media-amazon.com/images/M/MV5BMTY4NDMxNTU2OF5BMl5BanBnXkFtZTgwMDY3NzcwMjI@._V1_QL50_SY1000_CR0,0,666,1000_AL_.jpg"]
+
+		};
+
+		var eDetails = document.getElementById("details");
+		var eImageOnly = document.getElementById("image");
+
+		var displaymode = getQueryVariable("mode");
+		var number = getQueryVariable("number");
+		var eName = document.getElementById("idName");
+		var name = getQueryVariable("name");
+
+
+
+		if (displaymode != "full")
+		{
+			eDetails.style.display = "none";
+		}
+		else
+		{
+			var eNum = document.getElementById("idNumber");
+			eNum.innerHTML = number;
+
+			eName.innerHTML = "Who Am I?";
+		}
+
+
+		var e = rgDirectory[number];
+		var imgurl = "https://m.media-amazon.com/images/M/MV5BYjcyZTIwZDktNzZmNy00OGY2LTljMmYtMWU1ZWFjNDk4MDQyXkEyXkFqcGdeQXVyNTQ4OTYzOTQ@._V1_QL50_SY1000_CR0,0,696,1000_AL_.jpg";
+
+		if (e)
+		{
+			if (!!e[1])
+				imgurl = e[1];
+
+
+			if (!name)
+				name = e[0];
+
+		}
+
+		eImageOnly.style.backgroundImage = "url(" + imgurl + ")";
+		if (!!name)
+			eName.innerHTML = name;
+
+	</script>
+</body>
+
+</html>
