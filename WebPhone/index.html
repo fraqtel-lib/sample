@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+	<title>CTI/iframe integration Sample</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+
+
+<body>
+	<style>
+		html,
+		body,
+		iframe {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			margin: 0;
+		}
+
+		body {
+			background-color: aliceblue;
+			color: darkred;
+		}
+
+		input {
+			background-color: peachpuff;
+		}
+
+		header {
+			background-color: sandybrown;
+			border: dashed thin brown;
+		}
+	</style>
+
+	<main style="width:100%; height:100%; display: flex; flex-direction: column;">
+		<article style="flex-grow:1; display:flex; flex-direction:row;">
+			<header style="width: 25% ">
+				<!-- 1. The size of the iframe must be adequate to enable showing its various controls, at least 20em X 40em -->
+				<iframe id="idSoftPhone" src="//webctidemo.fraqtel.com"></iframe>
+			</header>
+			<div style="flex-grow:1;"><iframe id="popUPContent"></iframe></div>
+		</article>
+	</main>
+
+	<!-- 2. This enables javascript code to create the FraqtelAvayaCTI object -->
+	<script src="//webctidemo.fraqtel.com/FraqtelAvayaCTI.js"></script>
+	<script>
+		"use strict";
+
+		// Multiple, independent <iframe> based soft-phones are possible with this technique
+		EmbedPhone("idSoftPhone", "60", "", "");
+
+		function EmbedPhone(iframeName, stationid, agentid, agentpassword)
+		{
+			// 3. instantiating a new FraqtelAvayaCTI object gives access to the soft-phone
+			new FraqtelAvayaCTI(iframeName,
+				function (message)
+				{
+					console.debug("Received", message);
+
+					
+					var RegisterAgent = (function()
+					{
+						this.RegisterAgentStation(null, function (err) { console.debug(err); }, "", stationid);
+					}).bind(this);
+
+					switch (message.type)
+					{
+						case "FrameLoaded":
+							// We know that the soft-phone link loaded successfully, but CTI connectivity is not established yet. We must wait for a "CTIUp&Running" event when an active CTI server is detected.
+							break;
+
+						case "CTIUp&Running":
+							// 4. We must wait for this one-shot event to be fired before we can do any CTI activity
+
+							// 5. In this example, we check if the agent is already logged in the ACD. If not, we do so ourselves.
+							this.QueryAgentState(
+								function (agentstate)
+								{
+									if (agentstate.State === "NULL") //The agent is logged off, so we'll attempt to login ourselves
+									{
+										// Here, error or success lead to the loading of the soft-phone UI
+										this.LoginAgentACD(RegisterAgent, RegisterAgent, stationid, agentid, agentpassword, "MANUAL_IN");
+									}
+									else
+									{
+										// We may choose to connect anyway
+										RegisterAgent();
+									}
+								}
+								, function (err)
+								{
+									// Handle Error
+									// We could also choose to show the soft-phone without doing any login by calling RegisterAgent()
+
+								}
+								, stationid
+							);
+							break;
+
+						case "DeliveredEvent":
+							// 6. Pop a screen based on the caller's number
+							document.getElementById("popUPContent").setAttribute("src", "https://en.wikipedia.org/wiki/" + message.CallingDevice);
+							break;
+
+						case "GenerateProfileFrameURL":
+							{
+								// 7. It is useful to display profile information of the parties on a phone call. This interface permits the display of any such information according to your own logic. The URL generated is embeded in an <iframe> within the soft-phone
+								var number = message.Number;
+
+								if (!!number)
+								{
+									// 8. This is a sample page that loads photos from IMDB mapped randomly to the supplied phone number
+									this.ProfileFrameURL(null, null, number, "https://fraqtel-lib.github.io/sample/ProfileDisplay.html?number=" + number);
+								}
+							}
+							break;
+					}
+				});
+		}
+
+
+	</script>
+</body>
+
+</html>
