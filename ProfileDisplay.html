@@ -83,6 +83,7 @@
 				}
 			}
 			//console.log('Query variable %s not found', variable);
+			return null;
 		}
 
 		var rgDirectory =
@@ -127,7 +128,7 @@
 		var displaymode = getQueryVariable("mode");
 		var number = getQueryVariable("number");
 		var eName = document.getElementById("idName");
-		var name = getQueryVariable("name");
+		var nameoveride = getQueryVariable("name");
 
 
 
@@ -153,14 +154,14 @@
 				imgurl = e[1];
 
 
-			if (!name)
-				name = e[0];
+			if (!nameoveride)
+				nameoveride = e[0];
 
 		}
 
 		eImageOnly.style.backgroundImage = "url(" + imgurl + ")";
-		if (!!name)
-			eName.innerHTML = name;
+		if (!!nameoveride)
+			eName.innerHTML = nameoveride;
 
 	</script>
 </body>
