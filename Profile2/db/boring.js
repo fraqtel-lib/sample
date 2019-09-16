@@ -1,0 +1,37 @@
+var rgDirectory =
+{
+	"0" : ["?", "https://m.media-amazon.com/images/M/MV5BYjcyZTIwZDktNzZmNy00OGY2LTljMmYtMWU1ZWFjNDk4MDQyXkEyXkFqcGdeQXVyNTQ4OTYzOTQ@._V1_QL50_SY1000_CR0,0,696,1000_AL_.jpg"],
+	
+	"60": ["Влади́мир Влади́мирович Пу́тин", "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Vladimir_Putin_2019-04-12.jpg/800px-Vladimir_Putin_2019-04-12.jpg"],
+	"61": ["Donald John Trump", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/800px-Donald_Trump_official_portrait.jpg"],
+	"62": ["习近平", "https://upload.wikimedia.org/wikipedia/commons/3/32/Xi_Jinping_2019.jpg"],
+	"63": ["Angela Dorothea Merkel", "https://upload.wikimedia.org/wikipedia/commons/b/bf/Angela_Merkel._Tallinn_Digital_Summit.jpg"],
+	"64": ["Emmanuel Jean-Michel Frédéric Macron", "https://upload.wikimedia.org/wikipedia/commons/f/f4/Emmanuel_Macron_in_2019.jpg"],
+	"65": ["安倍 晋三", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Shinz%C5%8D_Abe_Official_%28cropped_2%29.jpg/800px-Shinz%C5%8D_Abe_Official_%28cropped_2%29.jpg"],
+	"66": ["નરેન્દ્ર દામોદરદાસ મોદી", "https://upload.wikimedia.org/wikipedia/commons/a/a1/PM_Modi_Portrait%28cropped%29.jpg"],
+	"67": ["Alexander Boris de Pfeffel Johnson", "https://upload.wikimedia.org/wikipedia/commons/3/34/Boris_Johnson_MP.jpg"],
+	"68": ["김정은", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Kim_Jong-un_IKS_2018.jpg/800px-Kim_Jong-un_IKS_2018.jpg"],
+	"69": ["이낙연", "https://upload.wikimedia.org/wikipedia/commons/0/08/South_Korean_Prime_Minister_Lee_-_2017_%2836235112603%29_%28cropped%29.jpg"],
+	"200": ["Justin Pierre James Trudeau", "https://upload.wikimedia.org/wikipedia/commons/b/b6/Trudeau_visit_White_House_for_USMCA_%28cropped%29.jpg"],
+	"201": ["Jair Messias Bolsonaro", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Jair_Bolsonaro_em_24_de_abril_de_2019_%281%29.jpg/800px-Jair_Bolsonaro_em_24_de_abril_de_2019_%281%29.jpg"],
+	"202": ["Mette Frederiksen", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/20190614_Folkemodet_Bornholm_Mette_Frederiksen_Socialdemokratiet_0285_%2848063468172%29_%28cropped%29.jpg/800px-20190614_Folkemodet_Bornholm_Mette_Frederiksen_Socialdemokratiet_0285_%2848063468172%29_%28cropped%29.jpg"],
+	"203": ["Katrín Jakobsdóttir", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Katr%C3%ADn_Jakobsd%C3%B3ttir_at_G%C3%B6teborg_Book_Fair_2012_03_%28cropped%29.jpg/800px-Katr%C3%ADn_Jakobsd%C3%B3ttir_at_G%C3%B6teborg_Book_Fair_2012_03_%28cropped%29.jpg"],
+	"204": ["Joko Widodo", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Joko_Widodo_2014_official_portrait.jpg/800px-Joko_Widodo_2014_official_portrait.jpg"],
+	"205": ["حسن روحانی", "https://upload.wikimedia.org/wikipedia/commons/8/82/Hassan_Rouani_2017_portrait.jpg"],
+	"206": ["בִּנְיָמִין נְתַנְיָהוּ", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Benjamin_Netanyahu_2018.jpg/800px-Benjamin_Netanyahu_2018.jpg"],
+	"207": ["Uhuru Muigai Kenyatta", "https://upload.wikimedia.org/wikipedia/commons/d/dd/Uhuru_Kenyatta.jpg"],
+	"208": ["محاضر بن محمد", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/HE_Dr_Mahathir_bin_Mohamad%2C_Prime_Minister_of_Malaysia_%2844582220115%29_%28cropped%29.jpg/800px-HE_Dr_Mahathir_bin_Mohamad%2C_Prime_Minister_of_Malaysia_%2844582220115%29_%28cropped%29.jpg"],
+	"209": ["Andrés Manuel López Obrador", "https://upload.wikimedia.org/wikipedia/commons/3/30/Reuni%C3%B3n_con_el_Presidente_Electo%2C_Andr%C3%A9s_Manuel_L%C3%B3pez_Obrador_8_%28cropped%29.jpg"],
+	"210": ["အောင်ဆန်းစုကြည်", "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Saara_Kuugongelwa-Amadhila.jpg/1024px-Saara_Kuugongelwa-Amadhila.jpg"],
+	"211": ["Saara Kuugongelwa-Amadhila", "https://m.media-amazon.com/images/M/MV5BMTkxMjA3OTQ0N15BMl5BanBnXkFtZTcwNDEwMzYwNg@@._V1_QL50_SY1000_CR0,0,711,1000_AL_.jpg"],
+	"212": ["खड्गप्रसाद ओली", "https://upload.wikimedia.org/wikipedia/commons/c/cd/KP_Oli.jpg"],
+	"213": ["Jacinda Kate Laurell Ardern", "https://upload.wikimedia.org/wikipedia/commons/6/6c/Jacinda_Ardern%2C_2018.jpg"],
+	"214": ["Erna Solberg", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Erna_Solberg_%28Red_carpet%29_-_Global_Citizen_Festival_Hamburg_04.jpg/800px-Erna_Solberg_%28Red_carpet%29_-_Global_Citizen_Festival_Hamburg_04.jpg"],
+	"215": ["Rodrigo Roa Duterte", "https://upload.wikimedia.org/wikipedia/commons/3/3e/President_Rodrigo_Duterte.jpg"],
+	"216": ["محمد بن سلمان بن عبدالعزيز آل سعود‎", "https://upload.wikimedia.org/wikipedia/commons/5/52/Crown_Prince_Mohammad_bin_Salman_Al_Saud_-_2017.jpg"],
+	"217": ["லீ சியன் லூங்", "https://upload.wikimedia.org/wikipedia/commons/e/e3/Lee_Hsien-Loong_-_World_Economic_Forum_Annual_Meeting_2012_cropped.jpg"],
+	"218": ["Recep Tayyip Erdoğan", "https://upload.wikimedia.org/wikipedia/commons/6/65/Recep_Tayyip_Erdo%C4%9Fan_2019_%28cropped%29.jpg"],
+	"219": ["蔡英文", "https://upload.wikimedia.org/wikipedia/commons/1/1b/%E8%94%A1%E8%8B%B1%E6%96%87%E5%AE%98%E6%96%B9%E5%85%83%E9%A6%96%E8%82%96%E5%83%8F%E7%85%A7.png"],
+	"220": ["Jean-Claude Juncker", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Ioannes_Claudius_Juncker_die_7_Martis_2014.jpg/800px-Ioannes_Claudius_Juncker_die_7_Martis_2014.jpg"]
+
+};

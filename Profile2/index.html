@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Profile Display Demo</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+
+<body>
+	<style>
+		html,
+		body,
+		main {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			margin: 0;
+		}
+
+		#image {
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center center;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+
+		main {
+			background-color: rgb(53, 53, 53);
+		}
+
+		section {
+			position: relative;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+
+		#details {
+			font-family: Arial, Helvetica, sans-serif;
+			padding: 0 1em;
+		}
+
+		#idName {
+			color: whitesmoke;
+			font-size: 80%;
+
+		}
+
+		#idNumber {
+			color: yellow;
+		}
+	</style>
+
+	<main style="display: flex;">
+		<section style="flex:1">
+			<div id="image"></div>
+		</section>
+		<section style="flex:3" id="details">
+			<span id="idNumber"></span>
+			<div id="idName"></div>
+		</section>
+	</main>
+
+	<script>
+		"use strict";
+
+		function getQueryVariable(variable)
+		{
+			var query = window.location.search.substring(1);
+			var vars = query.split('&');
+			for (var i = 0; i < vars.length; i++)
+			{
+				var pair = vars[i].split('=');
+				if (decodeURIComponent(pair[0]) == variable)
+				{
+					return decodeURIComponent(pair[1]);
+				}
+			}
+			//console.log('Query variable %s not found', variable);
+		}
+
+
+
+		var eDetails = document.getElementById("details");
+		var eImageOnly = document.getElementById("image");
+
+		var displaymode = getQueryVariable("mode");
+		var number = getQueryVariable("number");
+		var eName = document.getElementById("idName");
+		var nameoveride = getQueryVariable("name");
+
+		var photodatabase = getQueryVariable("db");
+
+
+		if (displaymode != "full")
+		{
+			eDetails.style.display = "none";
+		}
+		else
+		{
+			var eNum = document.getElementById("idNumber");
+			eNum.innerHTML = number;
+
+			eName.innerHTML = "Who Am I?";
+		}
+
+		function loadScript(url, callback)
+		{
+			// adding the script tag to the head as suggested before
+			var head = document.getElementsByTagName('head')[0];
+			var script = document.createElement('script');
+			script.type = 'text/javascript';
+			script.src = url;
+
+			// then bind the event to the callback function 
+			// there are several events for cross browser compatibility
+			script.onreadystatechange = callback;
+			script.onload = callback;
+
+			// fire the loading
+			head.appendChild(script);
+		}
+
+		if (!photodatabase)
+			photodatabase ="movies";
+
+		loadScript("db/"+photodatabase+".js", function ()
+		{
+			var e = rgDirectory[number];
+			var imgurl = "https://m.media-amazon.com/images/M/MV5BYjcyZTIwZDktNzZmNy00OGY2LTljMmYtMWU1ZWFjNDk4MDQyXkEyXkFqcGdeQXVyNTQ4OTYzOTQ@._V1_QL50_SY1000_CR0,0,696,1000_AL_.jpg";
+
+			if (!e)
+				e = rgDirectory[number];
+
+			if (e)
+			{
+				if (!!e[1])
+					imgurl = e[1];
+
+
+				if (!nameoveride)
+					nameoveride = e[0];
+
+			}
+
+			eImageOnly.style.backgroundImage = "url(" + imgurl + ")";
+			if (!!nameoveride)
+				eName.innerHTML = nameoveride;
+		});
+
+
+	</script>
+</body>
+
+</html>
