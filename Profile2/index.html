@@ -110,7 +110,7 @@
 			eName.innerHTML = "Who Am I?";
 		}
 
-		function loadScript(url, callback)
+		function loadScript(url, callback, onerror)
 		{
 			// adding the script tag to the head as suggested before
 			var head = document.getElementsByTagName('head')[0];
@@ -122,16 +122,28 @@
 			// there are several events for cross browser compatibility
 			script.onreadystatechange = callback;
 			script.onload = callback;
+			script.onerror = onerror;
 
 			// fire the loading
 			head.appendChild(script);
 		}
 
 		if (!photodatabase)
-			photodatabase ="movies";
+			loaddb();
+		else
+			loadScript("db/" + photodatabase + ".js", loaddb, loaddb);
 
-		loadScript("db/"+photodatabase+".js", function ()
+
+		function loaddb()
 		{
+			if (!window.rgDirectory)
+			{
+				window.rgDirectory =
+				{
+					"0": ["?", "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAgMTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CsKgIDxjaXJjbGUgc3Ryb2tlPSJyZWQiIGZpbGw9ImJsdWUiIGN4PSI1IiBjeT0iNSIgcj0iNSIvPgo8L3N2Zz4="]
+				};
+			}
+
 			var e = rgDirectory[number];
 			var imgurl = "https://m.media-amazon.com/images/M/MV5BYjcyZTIwZDktNzZmNy00OGY2LTljMmYtMWU1ZWFjNDk4MDQyXkEyXkFqcGdeQXVyNTQ4OTYzOTQ@._V1_QL50_SY1000_CR0,0,696,1000_AL_.jpg";
 
@@ -152,8 +164,7 @@
 			eImageOnly.style.backgroundImage = "url(" + imgurl + ")";
 			if (!!nameoveride)
 				eName.innerHTML = nameoveride;
-		});
-
+		}
 
 	</script>
 </body>
