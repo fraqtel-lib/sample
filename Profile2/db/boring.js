@@ -1,6 +1,6 @@
 var rgDirectory =
 {
-	"0" : ["?", "https://m.media-amazon.com/images/M/MV5BYjcyZTIwZDktNzZmNy00OGY2LTljMmYtMWU1ZWFjNDk4MDQyXkEyXkFqcGdeQXVyNTQ4OTYzOTQ@._V1_QL50_SY1000_CR0,0,696,1000_AL_.jpg"],
+	"0" : ["?", "https://upload.wikimedia.org/wikipedia/commons/a/a6/Anonymous_emblem.svg"],
 	
 	"60": ["Влади́мир Влади́мирович Пу́тин", "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Vladimir_Putin_2019-04-12.jpg/800px-Vladimir_Putin_2019-04-12.jpg"],
 	"61": ["Donald John Trump", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/800px-Donald_Trump_official_portrait.jpg"],
