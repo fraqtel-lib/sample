@@ -128,7 +128,7 @@
 			head.appendChild(script);
 		}
 
-		if (!photodatabase)
+		if (!photodatabase || photodatabase=="none")
 			loaddb();
 		else
 			loadScript("db/" + photodatabase + ".js", loaddb, loaddb);
