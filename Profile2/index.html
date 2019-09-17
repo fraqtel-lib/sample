@@ -128,7 +128,10 @@
 			head.appendChild(script);
 		}
 
-		if (!photodatabase || photodatabase=="none")
+		if (!photodatabase)
+			photodatabase = "boring";
+			
+		if (photodatabase=="none")
 			loaddb();
 		else
 			loadScript("db/" + photodatabase + ".js", loaddb, loaddb);
